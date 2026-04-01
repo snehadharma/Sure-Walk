@@ -86,16 +86,21 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 10
-      - name: Use Node.js 20
+      - name: Use Node.js 24
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: "pnpm"
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "4.0"
+          bundler-cache: true
       - name: Install dependencies
         run: pnpm install
       - name: Install dependencies
         run: |
-          cd apps/mobile/ios && pod install --repo-update
+          cd apps/mobile/ios && bundle install && bundle exec pod install --repo-update
       - name: Build iOS app (debug)
         run: |
           cd apps/mobile/ios && xcodebuild build -workspace SureWalk.xcworkspace \
