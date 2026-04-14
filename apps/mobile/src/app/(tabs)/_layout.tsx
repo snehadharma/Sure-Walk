@@ -116,6 +116,7 @@ const _layout = () => {
           tabBarIcon: ({ focused }) => (
             <UserCircleIcon size={32} weight={focused ? "fill" : "regular"} />
           ),
+          // contentStyle: { marginTop: 0 }
         }}
       />
     </Tabs>

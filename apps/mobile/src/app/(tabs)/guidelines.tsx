@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const guidelines = () => {
   return (
-    <View className="flex-col bg-white flex-1 pt-[34px]">
+    <View className="flex-col bg-white flex-1 pt-[34px] pt-safe">
       <View className="pb-2">
         <FontText className="text-2xl font-medium px-5 z-100">
           Information and Guidelines
