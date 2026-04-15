@@ -61,9 +61,9 @@ const Home = () => {
   // snap bar at roughly 11%, 40%, and 90%
   const snapPoints = useMemo(
     () => [
-      `${((110 + androidOffset) / height) * 100}%`,
-      `${((320 + androidOffset * 1.5) / height) * 100}%`,
-      "87.5%",
+      `${((100 + androidOffset) / height) * 100}%`,
+      `${((290 + androidOffset * 1.5) / height) * 100}%`,
+      "80.5%",
     ],
     [height, androidOffset],
   );

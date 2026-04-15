@@ -63,7 +63,7 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
       method,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${accessTokenFallback ?? accessToken}`,
       },
       body: body ? JSON.stringify(body) : undefined,
     });
@@ -159,7 +159,7 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
     };
 
     fetchUserInfo();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <UserContext.Provider

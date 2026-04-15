@@ -1,28 +1,22 @@
 import FontText from "@/src/components/font-text";
 import LargeButton from "@/src/components/large-button";
-import RadioButton from "@/src/components/radio-button";
-import TextInputField from "@/src/components/text-input-field";
 import { useSession } from "@/src/utils/context/user-context";
-import { Link } from "expo-router";
 import { useEffect, useState } from "react";
-import { ScrollView, TextInput, TouchableOpacity, View } from "react-native";
-import { gray200 } from "@/src/utils/colors";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import SignOutButton from "@/src/components/sign-out-button";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import EditProfileTextInput from "@/src/components/edit-profile-text-input";
 import DropdownSelect from "@/src/components/dropdown-select";
 
 const Profile = () => {
   const { user, loadingState, logOut, fetchProtected, updateUser } =
     useSession();
-  const { top } = useSafeAreaInsets();
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [eid, setEid] = useState("");
-  const [phoneNumber] = useState(user?.phoneNumber); // TODO
+  const [phoneNumber] = useState(user?.phoneNumber);
   const [requiresAssistance, setRequiresAssistance] = useState<boolean | null>(
     null,
   );
@@ -110,12 +104,7 @@ const Profile = () => {
       )}
       {loadingState === "done" && user && (
         <View className="flex-1">
-          {/* <View className="flex-1"> */}
           <View className="w-full h-[139px] bg-[#EFF6FF]" />
-          {/* <View
-            className="w-full bg-[#EFF6FF]"
-            style={{ height: 100 + top, marginTop: -top }}
-          /> */}
           <View className="text-center w-20 h-20 rounded-full bg-ut-burntorange items-center justify-center self-center -mt-10">
             <FontText className="text-center text-white text-[24px] font-medium">
               {user.firstName[0]}
@@ -176,7 +165,7 @@ const Profile = () => {
                     </View>
                     <View className="flex flex-col items-start self-stretch">
                       <FontText className="font-medium">
-                        ADA Assistance
+                        Americans with Disabilities Act (ADA)
                       </FontText>
                       <FontText className="mt-4 mb-1">
                         {user.requiresAssistance ? "Yes" : "No"}
@@ -188,12 +177,8 @@ const Profile = () => {
               )}
 
               {isEditing && (
-                <View className="flex-1 flex-col justify-start pt-4">
+                <View className="flex-1 flex-col justify-start mt-[34px] pt-4">
                   <View className="flex flex-col items-start gap-10 self-stretch pb-4">
-                    {/* <TextInput
-                    className=""
-                    placeholderTextColor={gray200}
-                  /> */}
                     <EditProfileTextInput
                       fieldName="First Name"
                       value={firstName}
@@ -228,9 +213,10 @@ const Profile = () => {
                       maxLength={20}
                       placeholder="1234567890"
                       editable={false}
+                      className="color-slate-500"
                     />
                     <DropdownSelect
-                      label="American Disabilities Act (ADA)"
+                      label="Americans with Disabilities Act (ADA)"
                       value={requiresAssistance}
                       onSelect={setRequiresAssistance}
                       options={[
@@ -238,23 +224,7 @@ const Profile = () => {
                         { label: "No", value: false },
                       ]}
                     />
-                    {/* <View >
-                    <FontText >
-                      American 
-                    </FontText>
-                    <RadioButton
-                      label="Yes, I need assistance"
-                      selected={requiresAssistance === true}
-                      onPress={() => setRequiresAssistance(true)}
-                    />
-                    <RadioButton
-                      label="No, I do not need assistance"
-                      selected={requiresAssistance === false}
-                      onPress={() => setRequiresAssistance(false)}
-                    />
-                  </View> */}
                   </View>
-
                   {errorMessage && <FontText>{errorMessage}</FontText>}
                 </View>
               )}
