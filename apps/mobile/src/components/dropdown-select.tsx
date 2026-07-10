@@ -19,22 +19,20 @@ const DropdownSelect = ({
   const selected = options.find((o) => o.value === value);
 
   return (
-    <View className="flex flex-col gap-2 w-full">
-      <FontText className="font-medium text-4 tracking-[0.48px]">
-        {label}
-      </FontText>
+    <View className="flex flex-col gap-2 w-full bg-white z-10">
+      <FontText className="font-medium text-md">{label}</FontText>
       <TouchableOpacity
         className="flex-row justify-between "
         onPress={() => setOpen(!open)}
       >
-        <FontText className="">
+        <FontText className="text-md mt-2">
           {selected ? selected.label : "Select an option"}
         </FontText>
         <CaretDownIcon size={24} />
       </TouchableOpacity>
 
       {open && (
-        <View className="border border-[#e5e7eb]">
+        <View className="border border-[#e5e7eb] mt-[-4px]">
           {options.map((option, index) => (
             <TouchableOpacity
               key={index}
@@ -57,7 +55,9 @@ const DropdownSelect = ({
           ))}
         </View>
       )}
-      <View className="border-b border-b-[#e5e7eb] w-full" />
+      {!open && (
+        <View className="border-b border-b-[#e5e7eb] w-full mt-[-4px]" />
+      )}
     </View>
   );
 };
